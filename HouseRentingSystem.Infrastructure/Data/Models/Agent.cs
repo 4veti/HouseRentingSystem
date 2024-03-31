@@ -30,13 +30,13 @@ namespace HouseRentingSystem.Infrastructure.Data.Models
         public string UserId { get; set; } = string.Empty;
 
         /// <summary>
+        /// Navigational property, a list of Houses the Agent is connected to
+        /// </summary>
+        public List<House> Houses { get; set; } = null!;
+
+        /// <summary>
         /// Identity user of the Agent
         /// </summary>
         public IdentityUser User { get; set; } = null!;
     }
 }
-
-//· Id – a unique integer, Primary Key
-//· PhoneNumber – a string with min length 7 and max length 15 (required)
-//· UserId – a string (required)
-//· User – an IdentityUser object

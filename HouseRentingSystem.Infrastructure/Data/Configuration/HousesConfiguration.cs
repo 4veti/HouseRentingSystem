@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace HouseRentingSystem.Infrastructure.Data.Configuration
 {
-    internal class HouseConfiguration : IEntityTypeConfiguration<House>
+    internal class HousesConfiguration : IEntityTypeConfiguration<House>
     {
         public void Configure(EntityTypeBuilder<House> builder)
         {
@@ -16,9 +16,13 @@ namespace HouseRentingSystem.Infrastructure.Data.Configuration
 
             builder
                 .HasOne(h => h.Agent)
-                .WithMany()
+                .WithMany(a => a.Houses)
                 .HasForeignKey(h => h.AgentId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            SeedData data = new();
+
+            builder.HasData(new House[] {data.FirstHouse, data.SecondHouse, data.ThirdHouse});
         }
     }
 }
