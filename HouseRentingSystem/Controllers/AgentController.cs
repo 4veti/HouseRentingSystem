@@ -8,13 +8,13 @@ namespace HouseRentingSystem.Controllers
         [HttpGet]
         public async Task<IActionResult> Become()
         {
-            return View();
+            return View(new BecomeAgentFormModel());
         }
 
         [HttpPost]
         public async Task<IActionResult> Become(BecomeAgentFormModel model)
         {
-            return RedirectToAction(nameof(HouseController.Index), "Houses");
+            return RedirectToAction(nameof(HouseController.All), "Houses");
         }
     }
 }
