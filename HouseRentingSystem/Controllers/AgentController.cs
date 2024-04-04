@@ -1,4 +1,4 @@
-﻿using HouseRentingSystem.Models.Agent;
+﻿using HouseRentingSystem.Core.Models.Agent;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HouseRentingSystem.Controllers
