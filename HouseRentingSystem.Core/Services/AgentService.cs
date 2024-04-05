@@ -14,19 +14,19 @@ namespace HouseRentingSystem.Core.Services
             repository = _repository;
         }
 
-        public async Task<bool> ExistsById(string userId)
+        public async Task<bool> ExistsByIdAsync(string userId)
             => await repository.AllAsReadOnlyAsync<Agent>()
                 .AnyAsync(a => a.UserId == userId);
 
-        public async Task<bool> UserHasRents(string userId)
+        public async Task<bool> UserHasRentsAsync(string userId)
             => await repository.AllAsReadOnlyAsync<House>()
                 .AnyAsync(h => h.RenterId == userId);
 
-        public async Task<bool> UserWithPhoneNumberExists(string phoneNumber)
+        public async Task<bool> UserWithPhoneNumberExistsAsync(string phoneNumber)
             => await repository.AllAsReadOnlyAsync<Agent>()
                 .AnyAsync(a => a.PhoneNumber == phoneNumber);
 
-        public async Task Create(string userId, string phoneNumber)
+        public async Task CreateAsync(string userId, string phoneNumber)
         {
             Agent agent = new Agent
             {
