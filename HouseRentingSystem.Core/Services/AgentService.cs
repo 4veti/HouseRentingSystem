@@ -14,7 +14,28 @@ namespace HouseRentingSystem.Core.Services
             repository = _repository;
         }
 
-        public Task<bool> ExistsById(string userId)
-            => repository.AllAsReadOnlyAsync<Agent>().AnyAsync(a => a.UserId == userId);
+        public async Task<bool> ExistsById(string userId)
+            => await repository.AllAsReadOnlyAsync<Agent>()
+                .AnyAsync(a => a.UserId == userId);
+
+        public async Task<bool> UserHasRents(string userId)
+            => await repository.AllAsReadOnlyAsync<House>()
+                .AnyAsync(h => h.RenterId == userId);
+
+        public async Task<bool> UserWithPhoneNumberExists(string phoneNumber)
+            => await repository.AllAsReadOnlyAsync<Agent>()
+                .AnyAsync(a => a.PhoneNumber == phoneNumber);
+
+        public async Task Create(string userId, string phoneNumber)
+        {
+            Agent agent = new Agent
+            {
+                UserId = userId,
+                PhoneNumber = phoneNumber
+            };
+
+            await repository.AddAsync(agent);
+            await repository.SaveChangesAsync();
+        }
     }
 }
