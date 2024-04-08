@@ -1,4 +1,4 @@
-﻿using HouseRentingSystem.Models.House;
+﻿using HouseRentingSystem.Core.Models.House;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,7 +8,7 @@ namespace HouseRentingSystem.Controllers
     {
         [HttpGet]
         [AllowAnonymous]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> All()
         {
             return View(new AllHousesQueryModel());
         }
@@ -53,13 +53,13 @@ namespace HouseRentingSystem.Controllers
         [HttpGet]
         public async Task<IActionResult> Delete(int id)
         {
-            return View(new HouseFormModel());
+            return View(new HouseDetailsViewModel());
         }
 
         [HttpPost]
         public async Task<IActionResult> Delete(HouseDetailsViewModel model)
         {
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(All));
         }
 
         [HttpPost]
