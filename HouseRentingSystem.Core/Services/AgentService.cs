@@ -1,4 +1,5 @@
 ﻿using HouseRentingSystem.Core.Contracts;
+using HouseRentingSystem.Infrastructure.Data.Common;
 using HouseRentingSystem.Infrastructure.Data.Contracts;
 using HouseRentingSystem.Infrastructure.Data.Models;
 using Microsoft.EntityFrameworkCore;
@@ -7,23 +8,23 @@ namespace HouseRentingSystem.Core.Services
 {
     public class AgentService : IAgentService
     {
-        private IRepository repository;
+        private IRepository _repository;
 
-        public AgentService(IRepository _repository)
+        public AgentService(IRepository repository)
         {
-            repository = _repository;
+            _repository = repository;
         }
 
         public async Task<bool> ExistsByIdAsync(string userId)
-            => await repository.AllAsReadOnlyAsync<Agent>()
+            => await _repository.AllAsReadOnlyAsync<Agent>()
                 .AnyAsync(a => a.UserId == userId);
 
         public async Task<bool> UserHasRentsAsync(string userId)
-            => await repository.AllAsReadOnlyAsync<House>()
+            => await _repository.AllAsReadOnlyAsync<House>()
                 .AnyAsync(h => h.RenterId == userId);
 
         public async Task<bool> UserWithPhoneNumberExistsAsync(string phoneNumber)
-            => await repository.AllAsReadOnlyAsync<Agent>()
+            => await _repository.AllAsReadOnlyAsync<Agent>()
                 .AnyAsync(a => a.PhoneNumber == phoneNumber);
 
         public async Task CreateAsync(string userId, string phoneNumber)
@@ -34,8 +35,15 @@ namespace HouseRentingSystem.Core.Services
                 PhoneNumber = phoneNumber
             };
 
-            await repository.AddAsync(agent);
-            await repository.SaveChangesAsync();
+            await _repository.AddAsync(agent);
+            await _repository.SaveChangesAsync();
+        }
+        public async Task<int> GetId(string userId)
+        {
+            Agent agentId = await _repository.AllAsReadOnlyAsync<Agent>()
+                                 .FirstAsync(a => a.UserId == userId);
+
+            return agentId.Id;
         }
     }
 }
