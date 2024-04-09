@@ -3,3 +3,9 @@
 }
 
 <h2 class="text-center">@ViewBag.Title</h2>
+
+<partial name="_HouseFormPartial" mmodel="@Model" />
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
