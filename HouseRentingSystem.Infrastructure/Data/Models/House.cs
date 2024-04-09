@@ -49,7 +49,6 @@ namespace HouseRentingSystem.Infrastructure.Data.Models
         /// Price per month of the House
         /// </summary>
         [Required]
-        //[Range(typeof(decimal), HousePricePerMonthMin, HousePricePerMonthMax, ConvertValueInInvariantCulture = true)]
         [Column(TypeName = "decimal(18, 2)")]
         [Comment("House price per month")]
         public decimal PricePerMonth { get; set; }
@@ -60,6 +59,7 @@ namespace HouseRentingSystem.Infrastructure.Data.Models
         [Required]
         [Comment("Id of the House's Category")]
         public int CategoryId { get; set; }
+
         /// <summary>
         /// Navigation property to the House's Category
         /// </summary>
