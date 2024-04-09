@@ -6,5 +6,6 @@
         public const string InvalidLengthErrorMessage = "The {0} field must be between {2} and {1} characters long.";
         public const string PhoneExistsErrorMessage = "An agent with this phone number already exists.";
         public const string UserHasRentsErrorMessage = "The user has existing rents.";
+        public const string CategoryDoesNotExist = "Category does not exist.";
     }
 }
